@@ -11,6 +11,8 @@ df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
 # Select price variable and range of date
 df_price = df.loc[(df['Date'] >= '2013-01-01') & (df['Date'] <= '2023-12-31'), ['Date', 'Price']]
 
+# Set the column "date" as index of the DataFrame
+df_price.set_index('Date', inplace=True)
 
 
 
