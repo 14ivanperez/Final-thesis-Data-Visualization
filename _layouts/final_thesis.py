@@ -1,20 +1,10 @@
-import pandas as pd
+import yfinance as yf
 import matplotlib.pyplot as plt
+import pandas as pd
 
+# Define the ticker for the Euronext 100 index
+ticker = "^N100"
 
-# Load data from Excel in pandas DataFrame
-df = pd.read_csv("EuroNext 100 Historical Data.csv")
-
-# Change Date column format
-df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
-
-# Select price variable and range of date
-df_price = df.loc[(df['Date'] >= '2013-01-01') & (df['Date'] <= '2023-12-31'), ['Date', 'Price']]
-
-# Set the column "date" as index of the DataFrame
-df_price.set_index('Date', inplace=True)
-
-
-
-
+# Download data from Yahoo Finance
+data = yf.download(ticker, start="2013-01-01", end="2022-12-31")
 
