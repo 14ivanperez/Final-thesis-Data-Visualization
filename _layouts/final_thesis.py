@@ -36,4 +36,8 @@ df = pd.DataFrame({"Closing Price": closing_price,
 
 # Display the DataFrame
 print(df)
+print(df.head())
+print(df.tail())
 
+# See descriptive stats
+print(df.describe())
