@@ -16,3 +16,24 @@ low = data["Low"]
 volume = data["Volume"]
 percent_change = (closing_price - opening_price) / opening_price * 100
 
+# Plot the closing price data
+plt.plot(closing_price)
+plt.title("Euronext 100 Price (2013-2022)")
+plt.xlabel("Date")
+plt.ylabel("Price (EUR)")
+plt.show()
+
+# Save the plot as an image in the "images" folder
+plt.savefig("images/euronext_100_prices.png")
+
+# Create a DataFrame with the data
+df = pd.DataFrame({"Closing Price": closing_price,
+                   "Opening Price": opening_price,
+                   "High": high,
+                   "Low": low,
+                   "Volume": volume,
+                   "% Change": percent_change})
+
+# Display the DataFrame
+print(df)
+
