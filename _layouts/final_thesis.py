@@ -23,9 +23,6 @@ plt.xlabel("Date")
 plt.ylabel("Price (EUR)")
 plt.show()
 
-# Save the plot as an image in the "images" folder
-plt.savefig("images/euronext_100_prices.png")
-
 # Create a DataFrame with the data
 df = pd.DataFrame({"Closing Price": closing_price,
                    "Opening Price": opening_price,
