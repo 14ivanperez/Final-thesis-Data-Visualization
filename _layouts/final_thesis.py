@@ -148,4 +148,26 @@ for confidence in confidence_intervals:
         stress_var_results[(confidence, time_frame)] = stress_var
 
 
+# Plotting VaR and Stress VaR
+x_ticks = [f"{time_frame}y" for time_frame in time_frames]  # Use 'y' for years
+
+plt.figure(figsize=(10, 6))
+
+# Plot VaR
+for confidence in confidence_intervals:
+    var_values = [var_results[(confidence, time_frame)] for time_frame in time_frames]
+    plt.plot(x_ticks, var_values, label=f"VaR {confidence * 100}%")
+
+# Plot Stress VaR
+for confidence in confidence_intervals:
+    stress_var_values = [stress_var_results[(confidence, time_frame)] for time_frame in time_frames]
+    plt.plot(x_ticks, stress_var_values, '--', label=f"Stress VaR {confidence * 100}%")
+
+plt.xlabel('Time Frame (Years)')
+plt.ylabel('VaR / Stress VaR in %')
+plt.title('Euronext 100 Value at Risk (VaR) and Stress VaR')
+plt.legend()
+plt.grid(True)
+plt.savefig('images/VaR.png')
+plt.show()
 
