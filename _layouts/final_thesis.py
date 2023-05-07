@@ -68,3 +68,26 @@ plt.title("Euronext 100 Index - Daily Returns")
 plt.savefig('images/returns.png')
 plt.show()
 
+# Define the tickers for the Euronext 100, FTSE100, and VIX
+tickers = ["^N100", "^FTSE", "^VIX"]
+
+# Download data from Yahoo Finance
+data = yf.download(tickers, start="2013-01-01", end="2022-12-31")
+
+# Extract the closing price data
+closing_prices = data["Close"]
+
+# Calculate daily returns
+returns = closing_prices.pct_change() * 100
+
+# Calculate correlations
+correlations = returns.corr()
+
+# Plot the correlation matrix
+plt.imshow(correlations, cmap="coolwarm", interpolation="nearest")
+plt.colorbar()
+plt.xticks(range(len(correlations)), correlations.columns, rotation=90)
+plt.yticks(range(len(correlations)), correlations.columns)
+plt.title("Correlation Matrix: Euronext 100, FTSE100, VIX")
+plt.savefig('images/correlations.png')
+plt.show()
