@@ -57,4 +57,14 @@ plt.title("High and Low Prices")
 plt.savefig('images/box_plot.png')
 plt.show()
 
+# Calculate daily returns
+returns = closing_price.pct_change() * 100
+
+# Plot the returns
+plt.plot(returns)
+plt.xlabel("Date")
+plt.ylabel("Returns (%)")
+plt.title("Euronext 100 Index - Daily Returns")
+plt.savefig('images/returns.png')
+plt.show()
 
