@@ -237,7 +237,7 @@ plt.plot(x_ticks, variance_values, label='Historical Variance')
 
 plt.xlabel('Time Horizon (Years)')
 plt.ylabel('Variance')
-plt.title('Historical Variance of EuroNext 100')
+plt.title('Historical Variance of Euronext 100')
 plt.legend()
 plt.grid(True)
 plt.savefig('images/Variance.png')
