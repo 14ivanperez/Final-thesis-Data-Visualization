@@ -50,8 +50,8 @@ plt.savefig('images/distribution_percent_changes.png')
 plt.show()
 
 #Box Plot of High and Low Prices
-plt.boxplot([high, low])
-plt.xticks([1, 2], ["High", "Low"])
+plt.boxplot([closing_price])
+plt.xticks([1], ["Price"])
 plt.ylabel("Price")
 plt.title("High and Low Prices")
 plt.savefig('images/box_plot.png')
