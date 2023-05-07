@@ -226,4 +226,20 @@ for time_horizon in time_horizons:
     variance_results[time_horizon] = variance
 
 
+# Plotting historical variance
+x_ticks = [f"{time_horizon}y" for time_horizon in time_horizons]  # Use 'y' for years
+
+plt.figure(figsize=(10, 6))
+
+# Plot historical variance
+variance_values = [variance_results[time_horizon] for time_horizon in time_horizons]
+plt.plot(x_ticks, variance_values, label='Historical Variance')
+
+plt.xlabel('Time Horizon (Years)')
+plt.ylabel('Variance')
+plt.title('Historical Variance')
+plt.legend()
+plt.grid(True)
+plt.savefig('images/Variance.png')
+plt.show()
 
