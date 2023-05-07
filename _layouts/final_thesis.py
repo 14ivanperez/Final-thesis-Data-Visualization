@@ -100,6 +100,52 @@ plt.imshow(covariance, cmap="coolwarm", interpolation="nearest")
 plt.colorbar()
 plt.xticks(range(len(covariance)), covariance.columns, rotation=90)
 plt.yticks(range(len(covariance)), covariance.columns)
-plt.savefig('images/covariance.png')
 plt.title("Covariance Matrix: Euronext 100, FTSE100, VIX")
+plt.savefig('images/covariance.png')
 plt.show()
+
+#Calculate VaR & Stressed VaR
+import numpy as np
+import scipy.stats as stats
+
+# Assuming you have historical closing price data stored in a pandas DataFrame called 'closing_price'
+
+# Calculate returns
+returns = closing_price.pct_change() * 100
+returns = returns.dropna()  # Remove any NaN values
+
+# Define confidence intervals and time frames (in years)
+confidence_intervals = [0.90, 0.95, 0.99]
+time_frames = [1, 5, 10]  # in years
+
+# Calculate VaR and Stress VaR for each combination
+var_results = {}
+stress_var_results = {}
+
+for confidence in confidence_intervals:
+    for time_frame in time_frames:
+        # Convert time frame from years to trading days
+        time_frame_days = time_frame * 252  # Assuming 252 trading days in a year
+
+        # Calculate the mean and standard deviation of returns for the given time frame
+        returns_subset = returns[-time_frame_days:]
+        returns_mean = returns_subset.mean()
+        returns_std = returns_subset.std()
+
+        # Calculate the z-score based on the confidence level
+        z = stats.norm.ppf(confidence)
+
+        # Calculate VaR
+        var = -(returns_mean + (z * returns_std))
+        var_results[(confidence, time_frame)] = var
+
+        # Calculate CVaR (Conditional Value at Risk)
+        cvar = -returns_subset[returns_subset <= var].mean()
+
+        # Calculate Stress VaR
+        k = stats.norm.ppf(1 - confidence)
+        stress_var = -(returns_mean + (z * returns_std)) + (k * cvar)
+        stress_var_results[(confidence, time_frame)] = stress_var
+
+
+
