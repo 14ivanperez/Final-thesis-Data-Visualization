@@ -191,7 +191,23 @@ for confidence in confidence_intervals:
         es_results[(confidence, time_horizon)] = es
 
 
+# Plotting Expected Shortfall
+x_ticks = [f"{time_horizon}y" for time_horizon in time_horizons]  # Use 'y' for years
 
+plt.figure(figsize=(10, 6))
+
+# Plot ES
+for confidence in confidence_intervals:
+    es_values = [es_results[(confidence, time_horizon)] for time_horizon in time_horizons]
+    plt.plot(x_ticks, es_values, label=f"ES {confidence * 100}%")
+
+plt.xlabel('Time Horizon (Years)')
+plt.ylabel('Expected Shortfall (ES)')
+plt.title('Expected Shortfall')
+plt.legend()
+plt.grid(True)
+plt.savefig('images/ES.png')
+plt.show()
 
 
 
