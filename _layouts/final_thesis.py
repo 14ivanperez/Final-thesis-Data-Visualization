@@ -202,14 +202,28 @@ for confidence in confidence_intervals:
     plt.plot(x_ticks, es_values, label=f"ES {confidence * 100}%")
 
 plt.xlabel('Time Horizon (Years)')
-plt.ylabel('Expected Shortfall (ES)')
-plt.title('Expected Shortfall')
+plt.ylabel('Expected Shortfall (ES) in %')
+plt.title('Euronext 100 Expected Shortfall')
 plt.legend()
 plt.grid(True)
 plt.savefig('images/ES.png')
 plt.show()
 
 
+# Define time horizons (in years)
+time_horizons = [1, 5, 10]  # in years
+
+# Calculate historical variance for each time horizon
+variance_results = {}
+
+for time_horizon in time_horizons:
+    # Convert time horizon from years to trading days
+    time_horizon_days = time_horizon * 252  # Assuming 252 trading days in a year
+
+    # Calculate historical variance
+    returns_subset = returns[-time_horizon_days:]
+    variance = np.var(returns_subset, ddof=1)  # ddof=1 for sample variance
+    variance_results[time_horizon] = variance
 
 
 
