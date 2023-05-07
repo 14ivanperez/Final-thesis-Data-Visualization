@@ -91,3 +91,15 @@ plt.yticks(range(len(correlations)), correlations.columns)
 plt.title("Correlation Matrix: Euronext 100, FTSE100, VIX")
 plt.savefig('images/correlations.png')
 plt.show()
+
+# Calculate covariance
+covariance = returns.cov()
+
+# Plot the covariance matrix
+plt.imshow(covariance, cmap="coolwarm", interpolation="nearest")
+plt.colorbar()
+plt.xticks(range(len(covariance)), covariance.columns, rotation=90)
+plt.yticks(range(len(covariance)), covariance.columns)
+plt.savefig('images/covariance.png')
+plt.title("Covariance Matrix: Euronext 100, FTSE100, VIX")
+plt.show()
