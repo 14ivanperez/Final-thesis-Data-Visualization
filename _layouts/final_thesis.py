@@ -40,3 +40,21 @@ print(df.tail())
 
 # See descriptive stats
 print(df.describe())
+
+#Histogram of daily percent changes
+plt.hist(percent_change, bins=20)
+plt.xlabel("Daily Percent Change")
+plt.ylabel("Frequency")
+plt.title("Distribution of Daily Percent Changes")
+plt.savefig('images/distribution_percent_changes.png')
+plt.show()
+
+#Box Plot of High and Low Prices
+plt.boxplot([high, low])
+plt.xticks([1, 2], ["High", "Low"])
+plt.ylabel("Price")
+plt.title("High and Low Prices")
+plt.savefig('images/box_plot.png')
+plt.show()
+
+
