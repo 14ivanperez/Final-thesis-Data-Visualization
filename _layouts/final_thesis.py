@@ -171,3 +171,29 @@ plt.grid(True)
 plt.savefig('images/VaR.png')
 plt.show()
 
+
+# Calculate new VaR to calculate then Expected Shortfall 
+var_results = {}
+es_results = {}
+
+for confidence in confidence_intervals:
+    for time_horizon in time_horizons:
+        # Convert time horizon from years to trading days
+        time_horizon_days = time_horizon * 252  # Assuming 252 trading days in a year
+
+         # Calculate VaR
+        var = np.percentile(returns[-time_horizon_days:], 100 - confidence * 100)
+        var_results[(confidence, time_horizon)] = var
+
+        # Calculate Expected Shortfall (ES)
+        returns_subset = returns[returns <= var][-time_horizon_days:]
+        es = -returns_subset.mean()
+        es_results[(confidence, time_horizon)] = es
+
+
+
+
+
+
+
+
