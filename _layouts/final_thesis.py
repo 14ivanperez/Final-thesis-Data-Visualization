@@ -278,6 +278,13 @@ beta = 0.8  # Coefficient of lagged conditional variance term
 model = arch.arch_model(returns, vol='Garch', p=1, q=1)
 model_fit = model.fit(disp='off')
 
+# Plot the estimated model parameters
+model_fit.plot()
+
+# Plot the conditional volatility
+model_fit.plot(annualize='D')
+plt.savefig('images/GARCH.png')
+plt.show()
 
 
 
