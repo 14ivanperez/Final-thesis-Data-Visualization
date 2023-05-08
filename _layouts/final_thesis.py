@@ -287,6 +287,51 @@ plt.savefig('images/GARCH.png')
 plt.show()
 
 
+#Create and graph Monte Carlo simulation
 
+# Define the ticker for the Euronext 100 index
+ticker = "^N100"
 
+# Download data from Yahoo Finance
+data = yf.download(ticker, start="2013-01-01", end="2022-12-31")
+
+# Extract the closing price data
+closing_price = data["Close"]
+
+# Calculate logarithmic returns from the closing prices
+returns = np.log(closing_price / closing_price.shift(1)).dropna()
+
+# Define parameters for the simulation
+num_simulations = 1000
+num_periods = len(returns)
+last_price = closing_price[-1]
+
+# Calculate mean and standard deviation of returns
+mean_return = returns.mean()
+std_deviation = returns.std()
+
+# Run Monte Carlo simulations
+simulation_results = []
+for _ in range(num_simulations):
+    # Generate random returns for each period
+    random_returns = np.random.normal(mean_return, std_deviation, num_periods)
+    
+    # Calculate simulated prices
+    simulated_prices = [last_price]
+    for i in range(1, num_periods):
+        simulated_price = simulated_prices[i-1] * np.exp(random_returns[i])
+        simulated_prices.append(simulated_price)
+    
+    simulation_results.append(simulated_prices)
+
+# Convert simulation results to a numpy array
+simulation_results = np.array(simulation_results)
+
+# Plot the Monte Carlo simulations
+plt.figure(figsize=(10, 6))
+plt.plot(simulation_results.T, color='gray', alpha=0.2)
+plt.xlabel('Time')
+plt.ylabel('Price')
+plt.title('Monte Carlo Simulations')
+plt.show()
 
