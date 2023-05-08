@@ -330,9 +330,9 @@ simulation_results = np.array(simulation_results)
 # Plot the Monte Carlo simulations
 plt.figure(figsize=(10, 6))
 plt.plot(simulation_results.T, color='gray', alpha=0.2)
-plt.xlabel('Time')
+plt.xlabel('Time (days)')
 plt.ylabel('Price')
-plt.title('Monte Carlo Simulations')
+plt.title('Euronext 100 Monte Carlo Simulations')
 plt.savefig('images/MonteCarlo.png')
 plt.show()
 
@@ -394,7 +394,7 @@ plt.bar(range(len(price_ranges)), probabilities)
 plt.xticks(range(len(price_ranges)), [f'{lower}-{upper}' for lower, upper in price_ranges], rotation=45, ha='right')  # Rotate and align the x-labels
 plt.xlabel('Price Range')
 plt.ylabel('Probability')
-plt.title('Probability of Price Finishing in a Given Range')
+plt.title('Probability of Euronext 100 price finishing in a given range')
 plt.gca().yaxis.set_major_formatter(PercentFormatter(1))
 plt.tight_layout()  # Add padding between subplots
 plt.savefig('images/Probabilities.png')
