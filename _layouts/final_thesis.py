@@ -258,7 +258,7 @@ for d in data:
 
 #Graph Kurtosis
 plt.bar(horizons, kurtosis_values)
-plt.xlabel('Time Horizon')
+plt.xlabel('Time Horizon (years)')
 plt.ylabel('Kurtosis')
 plt.title('Euronext 100 Kurtosis in Different Time Horizons')
 plt.savefig('images/Kurtosis.png')
