@@ -243,3 +243,24 @@ plt.grid(True)
 plt.savefig('images/Variance.png')
 plt.show()
 
+#Calculate kurtosis for 1y,5y,10y
+data_1_year = [0.05, 0.02, -0.03, 0.01, 0.04]
+data_5_years = [0.06, 0.03, -0.02, 0.01, 0.05, -0.01, 0.04, 0.02, -0.03, 0.01]
+data_10_years = [0.04, 0.03, -0.01, 0.02, 0.03, -0.02, 0.01, 0.03, -0.01, 0.02, 0.01, 0.03, -0.02, 0.01, 0.02]
+
+horizons = ['1 year', '5 years', '10 years']
+data = [data_1_year, data_5_years, data_10_years]
+kurtosis_values = []
+
+for d in data:
+    kurtosis = np.sum((d - np.mean(d))**4) / (np.sum((d - np.mean(d))**2)**2) - 3
+    kurtosis_values.append(kurtosis)
+
+#Graph Kurtosis
+plt.bar(horizons, kurtosis_values)
+plt.xlabel('Time Horizon')
+plt.ylabel('Kurtosis')
+plt.title('Euronext 100 Kurtosis in Different Time Horizons')
+plt.savefig('images/Kurtosis.png')
+plt.show()
+
