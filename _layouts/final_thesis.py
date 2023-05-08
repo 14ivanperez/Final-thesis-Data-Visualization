@@ -264,3 +264,22 @@ plt.title('Euronext 100 Kurtosis in Different Time Horizons')
 plt.savefig('images/Kurtosis.png')
 plt.show()
 
+#Calculate conditional volatility using GARCH
+import arch
+returns = closing_price.pct_change() * 100
+returns = returns.dropna()  # Remove any NaN values
+
+# Specify the GARCH model parameters
+omega = 0.001  # GARCH constant term
+alpha = 0.1  # Coefficient of lagged squared error term
+beta = 0.8  # Coefficient of lagged conditional variance term
+
+# Create the GARCH model
+model = arch.arch_model(returns, vol='Garch', p=1, q=1)
+model_fit = model.fit(disp='off')
+
+
+
+
+
+
