@@ -484,6 +484,42 @@ plt.savefig('images/Altman.png')
 plt.show()
 
 
+# Create a dictionary with the data
+data = {
+    '2018': [-2.3, -2.53, -2.86, -2.64, -2.42, -1.93, -2.1, -2.43, -2.8, -2.76, -2.3, -1.13, -2.49, -2.85, None],
+    '2019': [-2.78, -2.46, -2.82, -2.78, -2.67, -2.04, -2.66, -2.51, -2.95, -2.65, -2.95, -2.55, -2.68, -2.76, None],
+    '2020': [-3.02, -2.6, -4.72, -2.94, -3.14, -1.81, -2.86, -2.47, -2.94, -2.89, -2.04, -2.93, -2.8, -2.93, None],
+    '2021': [-2.23, -3.17, -3.04, -2.69, -2.17, -1.72, -2.68, -2.57, -2.45, -2.61, -2.68, -2.52, -2.3, -2.52, None],
+    '2022': [-2.5, -2.48, -2.52, -2.32, -2.7, -0.74, -2.13, -2.42, -2.12, -2.54, -2.5, -2.59, -2.56, -2.54, None]
+}
+
+# Create a DataFrame from the dictionary
+df = pd.DataFrame(data, index=['LVMH', 'ASML HOLDING', 'SHELL PLC', 'L’OREAL', 'TOTALENERGIES',
+                               'PROSUS', 'UNILEVER', 'SANOFI', 'EQUINOR', 'AB INBEV', 'AIRBUS',
+                               'ESSILORLUXOTTICA', 'SCHNEIDER ELECTRIC', 'AIR LIQUIDE', 'BNP PARIBAS'])
+
+# Plot Beneish M Scores
+plt.figure(figsize=(3, 5))
+plt.title('Beneish M Scores')
+plt.axis('off')  # Turn off the axis labels and ticks
+plt.table(cellText=df.values,
+          colLabels=df.columns,
+          rowLabels=df.index,
+          cellLoc='center',
+          colWidths=[0.1] * len(df.columns),
+          loc='center')
+
+# Adjust table layout
+table.auto_set_font_size(False)
+table.set_fontsize(6)
+table.scale(1.2, 1.2)
+
+# Position the title closer to the table
+plt.subplots_adjust(top=0.5)
+plt.savefig('images/Beneish.png')
+plt.show()
+
+
 
 
 
