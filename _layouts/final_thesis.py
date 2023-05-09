@@ -448,3 +448,52 @@ plt.show()
 
 
 
+# Create a dictionary with the data
+data = {
+    '2018': [3.64, 6.15, 2.68, 7.23, 6.4, -, 3.52, 1.62, 2.42, 1, 1.11, 2.22, 2.47, 2.33, 1.5],
+    '2019': [3.62, 8.53, 2.44, 7.45, 6.1, 13, 3.15, 1.78, 1.34, 1.26, 1.19, 2.65, 2.34, 2.66, 1.8],
+    '2020': [3.08, 9.38, 1.24, 8.37, 5.5, 12.45, 3.09, 2.04, 1.14, 1.03, 0.94, 2.19, 2.35, 2.85, 1.5],
+    '2021': [4.04, 10.47, 1.96, 8.14, 6, 10.29, 3.14, 1.94, 2.31, 1.13, 1.37, 2.61, 3, 3, 1.6],
+    '2022': [3.93, 6.03, 2.5, 6.99, 6.6, 6.24, 3.35, 2.06, 3.99, 1.24, 1.44, 2.66, 2.18, 3.06, 1.9]
+}
+
+# Create a DataFrame from the dictionary
+df = pd.DataFrame(data, index=['LVMH', 'ASML HOLDING', 'SHELL PLC', 'L’OREAL', 'TOTALENERGIES',
+                               'PROSUS', 'UNILEVER', 'SANOFI', 'EQUINOR', 'AB INBEV', 'AIRBUS',
+                               'ESSILORLUXOTTICA', 'SCHNEIDER ELECTRIC', 'AIR LIQUIDE', 'BNP PARIBAS'])
+
+# Plot Altman Z Scores
+plt.figure(figsize=(3, 5))
+plt.title('Altman Z Scores')
+plt.axis('off')  # Turn off the axis labels and ticks
+plt.table(cellText=df.values,
+          colLabels=df.columns,
+          rowLabels=df.index,
+          cellLoc='center',
+          colWidths=[0.1] * len(df.columns),
+          loc='center')
+
+# Adjust table layout
+table.auto_set_font_size(False)
+table.set_fontsize(6)
+table.scale(1.2, 1.2)
+
+# Position the title closer to the table
+plt.subplots_adjust(top=0.5)
+plt.savefig('images/Altman.png')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
