@@ -399,3 +399,52 @@ plt.gca().yaxis.set_major_formatter(PercentFormatter(1))
 plt.tight_layout()  # Add padding between subplots
 plt.savefig('images/Probabilities.png')
 plt.show()
+
+
+
+#Calculate and graph Confidence Interval
+
+# # Define the ticker for the Euronext 100 index
+ticker = "^N100"
+
+# Download data from Yahoo Finance
+data = yf.download(ticker, start="2013-01-01", end="2022-12-31")
+
+# Extract the closing price data
+closing_price = data["Close"]
+
+# Calculate the dynamic mean and standard deviation of the closing prices
+means = []
+stds = []
+
+for i in range(len(closing_price)):
+    subset = closing_price[:i + 1]
+    mean = np.mean(subset)
+    std = np.std(subset)
+    means.append(mean)
+    stds.append(std)
+
+# Calculate the dynamic confidence interval (95% confidence level)
+confidence_intervals = 1.96 * np.array(stds) / np.sqrt(np.arange(1, len(closing_price) + 1))
+
+# Plot the closing prices
+plt.plot(closing_price.index, closing_price, color='blue', label='Closing Price')
+
+# Plot the dynamic confidence interval
+plt.fill_between(closing_price.index, means - 40 * confidence_intervals, means + 40 * confidence_intervals,
+                 color='gray', alpha=0.2, label='Confidence Interval')
+
+# Set the plot title and labels
+plt.title('Closing Price with Dynamic 95% Confidence Interval')
+plt.xlabel('Date')
+plt.ylabel('Closing Price')
+
+# Display the legend
+plt.legend()
+
+# Save and show the plot
+plt.savefig('images/CI.png')
+plt.show()
+
+
+
