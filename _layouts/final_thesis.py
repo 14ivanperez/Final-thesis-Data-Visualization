@@ -86,8 +86,15 @@ correlations = returns.corr()
 # Plot the correlation matrix
 plt.imshow(correlations, cmap="coolwarm", interpolation="nearest")
 plt.colorbar()
-plt.xticks(range(len(correlations)), correlations.columns, rotation=90)
-plt.yticks(range(len(correlations)), correlations.columns)
+
+num_rows, num_cols = correlations.shape
+# Add correlation values in the correlation matrix
+for i in range(num_rows):
+    for j in range(num_cols):
+        plt.text(j, i, f"{correlations.iloc[i, j]:.2f}", ha='center', va='center', color='white')
+
+plt.xticks(range(len(correlations.columns)), correlations.columns, rotation=90)
+plt.yticks(range(len(correlations.columns)), correlations.columns)
 plt.title("Correlation Matrix: Euronext 100, FTSE100, VIX")
 plt.savefig('images/correlations.png')
 plt.show()
