@@ -250,6 +250,35 @@ plt.grid(True)
 plt.savefig('images/Variance.png')
 plt.show()
 
+# Calculate historical variance in a different way
+import yfinance as yf
+import matplotlib.pyplot as plt
+
+# Define the ticker symbol for the Euronext 100 index
+ticker = "^N100"
+
+# Download the historical data from Yahoo Finance
+data = yf.download(ticker, start="2013-01-01", end="2022-12-31")
+
+# Extract the adjusted close prices from the data
+close_prices = data["Adj Close"]
+
+# Calculate the daily returns
+returns = close_prices.pct_change()
+
+# Calculate the rolling variance with a window of 252 (considering trading days in a year)
+rolling_variance = returns.rolling(window=252).var()
+
+# Plot the rolling variance
+plt.plot(rolling_variance.index, rolling_variance)
+plt.title("Historical Variance of Euronext 100 (2013-2022)")
+plt.xlabel("Date")
+plt.ylabel("Variance")
+plt.grid(True)
+plt.savefig('images/Variance2.png')
+plt.show()
+
+
 #Calculate kurtosis for 1y,5y,10y
 data_1_year = [0.05, 0.02, -0.03, 0.01, 0.04]
 data_5_years = [0.06, 0.03, -0.02, 0.01, 0.05, -0.01, 0.04, 0.02, -0.03, 0.01]
